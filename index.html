@@ -52,7 +52,15 @@
         }
 
         .names { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: var(--primary-blue); margin: 10px 0; }
-        .restaurant-icon { width: 180px; margin: 25px 0; }
+        
+        /* RESTORAN RASMI UCHUN O'LCHAM */
+        .restaurant-icon { 
+            width: 100%; 
+            max-width: 320px; /* Kattaroq va uzunchoqroq ko'rinishi uchun */
+            height: auto; 
+            margin: 20px 0; 
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
 
         /* TO'YONA SECTION */
         .gift-section { margin: 40px 0; padding: 25px; background: #fff; border-radius: 20px; border: 1px solid #eee; }
@@ -166,7 +174,7 @@
         function downloadICS() {
             const icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\n" +
                 "URL:" + document.URL + "\n" +
-                "DTSTART:20261227T130000Z\n" + // 18:00 (UTC+5 bo'lgani uchun 13:00)
+                "DTSTART:20261227T130000Z\n" + 
                 "DTEND:20261227T180000Z\n" +
                 "SUMMARY:Komil va ??? To'y Marosimi\n" +
                 "DESCRIPTION:Sizni to'yimizda kutib qolamiz!\n" +
@@ -199,8 +207,10 @@
 
         function changeLang(lang) {
             const t = translations[lang];
+            const activeBtn = event ? event.target : document.querySelector('.lang-btn');
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if(activeBtn) activeBtn.classList.add('active');
+            
             document.getElementById('save-btn').innerText = t.save;
             document.getElementById('tap-text').innerText = t.tap;
             document.getElementById('sub-text').innerText = t.sub;
